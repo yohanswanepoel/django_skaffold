@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta4
+kind: Config
+metadata:
+  name: django-openshift-js
+build:
+  artifacts:
+  - image: johan/skaffold-demo
+deploy:
+  kubectl:
+    manifests:
+    - k8s*
+
