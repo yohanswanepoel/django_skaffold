@@ -5,7 +5,7 @@ Essentially this allows me to run up the application pattern and have skaffold r
 
 ## Setup steps
 - Minikube (addons secure registry, ingress)
-- Skaffold setup
+- Skaffold setup (https://skaffold.dev)
 - I use Red Hat base images so setup registry info below
 - Build is on Minikube
 
