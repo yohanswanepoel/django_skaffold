@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skaffold-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skaffold-demo
+  template:
+    metadata:
+      labels:
+        app: skaffold-demo
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - name: check-db
+          image: busybox:1.30.0
+          command: ['sh', '-c', "until nslookup skaffold-demo-db.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+      containers:
+      - name: skaffold-demo
+        image: johan/skaffold-demo
+        env:
+          - name: DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: user
+
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: password
+
+          - name: DATABASE_ENGINE
+            value: postgresql
+
+          - name: DATABASE_NAME
+            value: kubernetes_django
+          
+          - name: DATABASE_SERVICE_NAME
+            value: skaffold-demo-db
+
+        ports:
+        - containerPort: 8000
+        
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"

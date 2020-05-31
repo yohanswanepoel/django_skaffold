@@ -24,9 +24,17 @@ copy file : sudo scp ~/.docker/config.json /var/lib/kubelet/config.json
 ```
 restart minikubbe, you should now be able to pull from your secure registry.
 
-## Then it is as simple as
+## For local SQL Lite Then it is as simple as
 ```bash
 skaffold dev
+
+minikube service skaffold-demo
+```
+
+## For local PostgreSQL
+This option deploys a postgresql container to run the database
+```bash
+skaffold dev -p with_pg
 
 minikube service skaffold-demo
 ```
@@ -43,7 +51,13 @@ podman build -t django:latest .
 podman run -p 8000:8000 localhost/django:latest
 ```
 
+roll deployment again
+```bash
+kubectl -n default rollout restart deployment skaffold-demo
+```
+
 ## TODO
-- Currently this is a single django app with local SQL DB
-- Need to build out with Postgresql
 - Build file needs tuning for multi-stage builds
+- Database migrations needs a better way (it is currently okay for Dev)
+- Stateful set if need persistent storage
+- Implement health probes

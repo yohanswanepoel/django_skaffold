@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-db
+  labels:
+    app: skaffold-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skaffold-demo-db
+  template:
+    metadata:
+      labels:
+        app: skaffold-demo-db
+        tier: backend
+    spec:
+      containers:
+      - name: skaffold-demo-db
+        image: registry.redhat.io/rhel8/postgresql-12:latest
+        env:
+          - name: POSTGRESQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: user
+
+          - name: POSTGRESQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: password
+
+          - name: POSTGRESQL_DATABASE
+            value: kubernetes_django
+
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+
+        ports:
+        - containerPort: 5432
+
+        volumeMounts:
+            - name: postgres-volume-mount
+              mountPath: /var/lib/postgresql/data
+
+      volumes:
+        - name: postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: pg-pvc

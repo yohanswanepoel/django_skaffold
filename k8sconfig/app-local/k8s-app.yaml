@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: skaffold-demo
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: skaffold-demo
@@ -11,8 +12,14 @@ spec:
       labels:
         app: skaffold-demo
     spec:
+      restartPolicy: Always
       containers:
       - name: skaffold-demo
         image: johan/skaffold-demo
         ports:
         - containerPort: 8000
+        
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"

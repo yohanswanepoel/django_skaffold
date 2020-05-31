@@ -11,5 +11,7 @@ class Accounts(models.Model):
     balance_date = models.DateTimeField(verbose_name=_("Date Updated"), auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=None, null=False, verbose_name=_("Owner"), related_name='%(class)s_owner')
 
+    # Adding some documentation
+    # Testing comments
     def __str__(self):
         return self.display_name
