@@ -5,6 +5,7 @@ metadata:
 build:
   artifacts:
   - image: johan/skaffold-demo
+    context: ./src
 deploy:
   kubectl:
     manifests:

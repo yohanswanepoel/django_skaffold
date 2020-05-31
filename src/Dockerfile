@@ -4,8 +4,8 @@ RUN microdnf install python3; microdnf clean all
 
 RUN python3 -m venv /opt/venv
 
-COPY src/requirements.txt .
-COPY src/requirements ./requirements
+COPY ./requirements.txt .
+COPY ./requirements ./requirements
 
 ENV PATH="/opt/venv/bin:$PATH"
 
@@ -19,7 +19,7 @@ EXPOSE 8000
 
 WORKDIR /django
 
-ADD src /django
+ADD . /django
 
 RUN python manage.py makemigrations
 
