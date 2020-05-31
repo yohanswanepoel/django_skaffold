@@ -4,7 +4,7 @@ This is for local innerloop development. You may want to extend it. I also tried
 Essentially this allows me to run up the application pattern and have skaffold rebuild/redploy containers as I make code changes allowing high fidelity testing.
 
 ## Setup steps
-- Minikube (addons secure registry, ingress)
+- Minikube (addons registry-creds, ingress, storage-provisioner, default-storageclass)
 - Skaffold setup (https://skaffold.dev)
 - I use Red Hat base images so setup registry info below
 - Build is on Minikube
@@ -28,7 +28,6 @@ restart minikubbe, you should now be able to pull from your secure registry.
 ```bash
 skaffold dev
 
-minikube service skaffold-demo
 ```
 
 ## For local PostgreSQL
@@ -36,7 +35,17 @@ This option deploys a postgresql container to run the database
 ```bash
 skaffold dev -p with_pg
 
-minikube service skaffold-demo
+```
+
+# For acess to web ui
+This now uses the ingress so it requires a hosts entry 
+```bash
+# Get the up
+minikube ip
+
+# add to /etc/hosts 
+[ip] django.ino
+
 ```
 
 ## Useful for debugging
