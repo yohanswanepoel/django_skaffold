@@ -3,6 +3,10 @@ This is for local innerloop development. You may want to extend it. I also tried
 
 Essentially this allows me to run up the application pattern and have skaffold rebuild/redploy containers as I make code changes allowing high fidelity testing.
 
+## Good bits
+- Multi stage python build - saves a small amount of storage. This will safe heaps if you have to build packages from source
+- Non-root container++
+
 ## Setup steps
 - Minikube (addons registry-creds, ingress, storage-provisioner, default-storageclass)
 - Skaffold setup (https://skaffold.dev)
@@ -44,7 +48,7 @@ This now uses the ingress so it requires a hosts entry
 minikube ip
 
 # add to /etc/hosts 
-[ip] django.ino
+[ip] django.info
 
 ```
 
@@ -66,7 +70,6 @@ kubectl -n default rollout restart deployment skaffold-demo
 ```
 
 ## TODO
-- Build file needs tuning for multi-stage builds
 - Database migrations needs a better way (it is currently okay for Dev)
 - Stateful set if need persistent storage
 - Implement health probes
