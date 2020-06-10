@@ -28,6 +28,13 @@ copy file : sudo scp ~/.docker/config.json /var/lib/kubelet/config.json
 ```
 restart minikubbe, you should now be able to pull from your secure registry.
 
+## For local SQL Lite and hot reload - Make migrations wont run in this mode. Note File requires TAR for this to work
+```bash
+# Does not run migrations or reinstall requirements
+skaffold dev -p hot_reload
+
+```
+
 ## For local SQL Lite Then it is as simple as
 ```bash
 skaffold dev
@@ -73,3 +80,4 @@ kubectl -n default rollout restart deployment skaffold-demo
 - Database migrations needs a better way (it is currently okay for Dev)
 - Stateful set if need persistent storage
 - Implement health probes
+- Using hot reload, would it make sense to run make migrations and migrate as part of start script?

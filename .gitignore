@@ -86,6 +86,9 @@ env/
 venv/
 ENV/
 
+# ODO
+.odo/
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -361,3 +364,5 @@ pip-selfcheck.json
 myaccounts/media/
 
 
+
+.odo/odo-file-index.json

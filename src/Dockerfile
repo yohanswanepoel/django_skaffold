@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal as run-image
-RUN microdnf install python3
+RUN microdnf install python3 tar
 COPY --from=base /opt/venv /opt/venv
 
 ENV PATH="/opt/venv/bin:$PATH"

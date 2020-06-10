@@ -10,7 +10,20 @@ deploy:
   kubectl:
     manifests:
     - ./k8sconfig/app-local/k8s*
-profiles:
+profiles: 
+- name: hot_reload
+  activation:
+    - command: hot_reload
+  build:
+    artifacts:
+    - image: johan/skaffold-demo
+      context: ./src
+      sync:
+        infer: ["**/*"]
+  deploy:
+    kubectl:
+      manifests:
+      - ./k8sconfig/app-local/k8s*
 - name: with_pg
   build:
     artifacts:
