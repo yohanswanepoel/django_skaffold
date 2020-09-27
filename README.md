@@ -21,12 +21,13 @@ Essentially this allows me to run up the application pattern and have skaffold r
 ## Setup registry (optional)
 If you use a secure registry for base images you need this.
 ```bash
+minikube addons enable ingress
 minikube ssh
 docker login registry.redhat.io
 copy file : sudo scp ~/.docker/config.json /var/lib/kubelet/config.json 
 
 ```
-restart minikubbe, you should now be able to pull from your secure registry.
+restart minikube, you should now be able asto pull from your secure registry.
 
 ## For local SQL Lite and hot reload - Make migrations wont run in this mode. Note File requires TAR for this to work
 ```bash
