@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi8/ubi-minimal as base
+FROM registry.access.redhat.com/ubi8/ubi-minimal as base
 
 RUN microdnf install python3; microdnf clean all
 

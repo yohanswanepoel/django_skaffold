@@ -8,7 +8,7 @@ Essentially this allows me to run up the application pattern and have skaffold r
 - Non-root container++
 
 ## Setup steps
-- Minikube (addons registry-creds, ingress, storage-provisioner, default-storageclass)
+- Minikube (ingress, storage-provisioner, default-storageclass)
 - Skaffold setup (https://skaffold.dev)
 - I use Red Hat base images so setup registry info below
 - Build is on Minikube
@@ -22,12 +22,13 @@ Essentially this allows me to run up the application pattern and have skaffold r
 If you use a secure registry for base images you need this.
 ```bash
 minikube addons enable ingress
+# Optional but using registry.access.redhat.com does not require this
 minikube ssh
 docker login registry.redhat.io
 copy file : sudo scp ~/.docker/config.json /var/lib/kubelet/config.json 
 
 ```
-restart minikube, you should now be able asto pull from your secure registry.
+restart minikube, you should now be able also pull from your secure registry.
 
 ## For local SQL Lite and hot reload - Make migrations wont run in this mode. Note File requires TAR for this to work
 ```bash
