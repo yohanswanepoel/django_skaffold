@@ -8,6 +8,7 @@ COPY ./requirements.txt .
 COPY ./requirements ./requirements
 ENV PATH="/opt/venv/bin:$PATH"
 
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 

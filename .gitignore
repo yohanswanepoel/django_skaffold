@@ -366,3 +366,6 @@ myaccounts/media/
 
 
 .odo/odo-file-index.json
+
+src/mydatabase
+src/staticfiles
