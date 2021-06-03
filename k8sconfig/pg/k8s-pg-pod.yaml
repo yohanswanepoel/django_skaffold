@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: skaffold-demo-db
-        image: registry.access.redhat.com/rhel8/postgresql-12:latest
+        image: centos/postgresql-12-centos8
         env:
           - name: POSTGRESQL_USER
             valueFrom:
