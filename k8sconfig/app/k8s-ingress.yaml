@@ -6,7 +6,7 @@
      nginx.ingress.kubernetes.io/rewrite-target: /
  spec:
    rules:
-   - host: django.info
+   - host: django.test
      http:
        paths:
        - path: /
