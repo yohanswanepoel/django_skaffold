@@ -30,6 +30,13 @@ copy file : sudo scp ~/.docker/config.json /var/lib/kubelet/config.json
 ```
 restart minikube, you should now be able also pull from your secure registry.
 
+Work in a different namespace
+```bash
+kubectl create namespace development
+kubectl config set-context --current --namespace=development
+
+```
+
 ## For local SQL Lite and hot reload - Make migrations wont run in this mode. Note File requires TAR for this to work
 ```bash
 # Does not run migrations or reinstall requirements
